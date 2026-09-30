@@ -13,6 +13,7 @@ interface HeroProps {
   onQuickClaim: (urlOrHandle: string, bidAmount: number) => void;
   activeNavTab: string;
   setActiveNavTab: (tab: string) => void;
+  onSelectAll: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -26,8 +27,9 @@ export const Hero: React.FC<HeroProps> = ({
   onQuickClaim,
   activeNavTab,
   setActiveNavTab,
+  onSelectAll,
 }) => {
-  const initialBid = topListingBid > 0 ? topListingBid + 5 : 10;
+  const initialBid = topListingBid > 0 ? topListingBid + 5 : 1;
   const [bidAmount, setBidAmount] = useState<number>(initialBid);
   const [urlInput, setUrlInput] = useState('');
 
@@ -57,7 +59,7 @@ export const Hero: React.FC<HeroProps> = ({
   const format2 = (n: number) => n.toString().padStart(2, '0');
 
   useEffect(() => {
-    setBidAmount(topListingBid > 0 ? topListingBid + 5 : 10);
+    setBidAmount(topListingBid > 0 ? topListingBid + 5 : 1);
   }, [topListingBid]);
 
   const handleIncrement = () => {
@@ -67,7 +69,7 @@ export const Hero: React.FC<HeroProps> = ({
 
   const handleDecrement = () => {
     soundFX.playClick();
-    const minBid = topListingBid > 0 ? topListingBid + 5 : 10;
+    const minBid = topListingBid > 0 ? topListingBid + 5 : 1;
     setBidAmount((prev) => Math.max(minBid, prev - 1));
   };
 
@@ -84,7 +86,7 @@ export const Hero: React.FC<HeroProps> = ({
         <button
           onClick={() => {
             soundFX.playClick();
-            setActiveNavTab('all');
+            onSelectAll();
           }}
           className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full transition-all cursor-pointer ${
             activeNavTab === 'all'
