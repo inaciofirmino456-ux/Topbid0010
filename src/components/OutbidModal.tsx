@@ -30,7 +30,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
   const [tagline, setTagline] = useState('');
   const [category, setCategory] = useState<Category>('Side Projects');
   const [icon, setIcon] = useState('');
-  const [bidAmount, setBidAmount] = useState<number>(10);
+  const [bidAmount, setBidAmount] = useState<number>(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -56,7 +56,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
       }
       setCategory('Side Projects');
       setIcon('');
-      const minRequired = topBid > 0 ? topBid + 5 : 10;
+      const minRequired = topBid > 0 ? topBid + 5 : 1;
       setBidAmount(initialBid ? Math.max(minRequired, initialBid) : minRequired);
     }
     setIsSuccess(false);
@@ -100,12 +100,12 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
 
   const addBid = (delta: number) => {
     soundFX.playClick();
-    setBidAmount(prev => Math.max(10, prev + delta));
+    setBidAmount(prev => Math.max(1, prev + delta));
   };
 
   const setTargetTopRank = () => {
     soundFX.playClick();
-    setBidAmount(topBid > 0 ? topBid + 5 : 10);
+    setBidAmount(topBid > 0 ? topBid + 5 : 1);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -169,7 +169,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
               <p className="text-xs text-[#78716c]">
                 {targetListing
                   ? `Pay the difference to beat spot #${currentListings.findIndex(l => l.id === targetListing.id) + 1}`
-                  : 'Pay to rank instantly. Minimum bid $10.'}
+                  : 'Pay to rank instantly. Minimum bid $1.'}
               </p>
             </div>
           </div>
@@ -221,7 +221,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
                   onClick={setTargetTopRank}
                   className="text-xs font-mono font-bold text-[#e05638] underline hover:opacity-80"
                 >
-                  ${(topBid > 0 ? topBid + 5 : 10).toLocaleString()}
+                  ${(topBid > 0 ? topBid + 5 : 1).toLocaleString()}
                 </button>
               </div>
             </div>
@@ -296,7 +296,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
                   Bid Amount ($ USD)
                 </label>
                 <span className="text-[11px] font-mono text-[#78716c]">
-                  Min: $10
+                  Min: $1
                 </span>
               </div>
 
@@ -306,11 +306,11 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
                 </span>
                 <input
                   type="number"
-                  min={10}
+                  min={1}
                   max={999999}
                   step={1}
                   value={bidAmount}
-                  onChange={(e) => setBidAmount(Math.max(10, parseInt(e.target.value) || 10))}
+                  onChange={(e) => setBidAmount(Math.max(1, parseInt(e.target.value) || 1))}
                   className="w-full pl-9 pr-4 py-3 rounded-2xl bg-white border-2 border-[#e05638] text-xl font-bold font-mono text-[#e05638] focus:outline-none"
                 />
               </div>
