@@ -135,9 +135,7 @@ export const Hero: React.FC<HeroProps> = ({
         </span>
         <span className="font-bold text-emerald-600">{onlineCount} online</span>
         <span className="text-[#a8a29e]">·</span>
-        <span>1,894 visitors today</span>
-        <span className="text-[#a8a29e]">·</span>
-        <span className="text-[#78716c] hover:text-[#e05638] cursor-pointer">stats→</span>
+        <span>Real activity only</span>
       </div>
 
       {/* 3. Timeframe Toggle: [ 🏆 All-time | 🔴 Today ] */}
