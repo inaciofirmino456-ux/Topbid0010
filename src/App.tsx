@@ -16,8 +16,8 @@ import { INITIAL_LISTINGS, INITIAL_ACTIVITIES } from './data/initialListings';
 import { Listing, Category, ActivityEvent } from './types';
 import { soundFX } from './utils/audio';
 
-const STORAGE_LISTINGS_KEY = 'topbid_data_v4_listings';
-const STORAGE_ACTIVITIES_KEY = 'topbid_data_v4_activities';
+const STORAGE_LISTINGS_KEY = 'topbid_data_v5_listings';
+const STORAGE_ACTIVITIES_KEY = 'topbid_data_v5_activities';
 const STORAGE_SOUND_KEY = 'topbid_sound_enabled';
 
 const ALL_CATEGORIES: Category[] = [
@@ -41,7 +41,7 @@ export default function App() {
         console.error('Failed to load listings', err);
       }
     }
-    return INITIAL_LISTINGS;
+    return [];
   });
 
   const [activities, setActivities] = useState<ActivityEvent[]>(() => {
@@ -53,7 +53,7 @@ export default function App() {
         console.error('Failed to load activities', err);
       }
     }
-    return INITIAL_ACTIVITIES;
+    return [];
   });
 
   const [soundEnabled, setSoundEnabled] = useState<boolean>(() => {
@@ -75,7 +75,7 @@ export default function App() {
   const [quickClaimUrl, setQuickClaimUrl] = useState('');
   const [quickClaimBid, setQuickClaimBid] = useState<number | undefined>(undefined);
 
-  const [onlineCount, setOnlineCount] = useState(35);
+  // No simulated users: this count stays at zero until real client activity is connected.
 
   useEffect(() => {
     soundFX.enabled = soundEnabled;
@@ -102,15 +102,7 @@ export default function App() {
     }
   }, [activities]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setOnlineCount((prev) => {
-        const change = Math.floor(Math.random() * 3) - 1;
-        return Math.max(28, Math.min(48, prev + change));
-      });
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const onlineCount = 0;
 
   const totalVolume = useMemo(() => {
     return listings.reduce((sum, item) => sum + item.bid, 0);
@@ -246,8 +238,8 @@ export default function App() {
   const handleResetData = () => {
     localStorage.removeItem(STORAGE_LISTINGS_KEY);
     localStorage.removeItem(STORAGE_ACTIVITIES_KEY);
-    setListings(INITIAL_LISTINGS);
-    setActivities(INITIAL_ACTIVITIES);
+    setListings([]);
+    setActivities([]);
     setSelectedCategory('All');
     setSearchQuery('');
   };
