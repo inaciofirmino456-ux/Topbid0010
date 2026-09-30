@@ -54,7 +54,7 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
               <div>
                 <span className="font-bold text-[#1c1917] block text-xs mb-0.5">Bidding Thresholds</span>
                 <span className="text-xs text-[#78716c]">
-                  Minimum bid to get listed is $10. To claim the #1 spot, your bid must be at least $5 higher than the current leader.
+                  Minimum bid to get listed is $1. To claim the #1 spot, your bid must be at least $5 higher than the current leader.
                 </span>
               </div>
             </div>
