@@ -28,8 +28,8 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
   const [url, setUrl] = useState('');
   const [name, setName] = useState('');
   const [tagline, setTagline] = useState('');
-  const [category, setCategory] = useState<Category>('Developer Tools');
-  const [icon, setIcon] = useState('⚡');
+  const [category, setCategory] = useState<Category>('Side Projects');
+  const [icon, setIcon] = useState('');
   const [bidAmount, setBidAmount] = useState<number>(10);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -54,8 +54,8 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
         setName('');
         setTagline('');
       }
-      setCategory('Developer Tools');
-      setIcon('🚀');
+      setCategory('Side Projects');
+      setIcon('');
       const minRequired = topBid > 0 ? topBid + 5 : 10;
       setBidAmount(initialBid ? Math.max(minRequired, initialBid) : minRequired);
     }
@@ -71,7 +71,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
         if (clean.startsWith('x.com/') || clean.startsWith('twitter.com/')) {
           const handle = '@' + clean.split('/')[1];
           if (!name) setName(handle);
-          if (!tagline) setTagline('Creator and builder on X');
+          if (!tagline) setTagline('');
           setCategory('X / Twitter Profiles');
           setIcon('𝕏');
         } else if (clean.includes('.')) {
@@ -136,7 +136,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
         onSuccessfulBid(
           {
             name,
-            tagline: tagline || 'The future of innovation.',
+            tagline: tagline || '',
             url: url.startsWith('http') || url.startsWith('@') ? url : `https://${url}`,
             category,
             icon,
@@ -352,7 +352,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
             <div className="pt-2">
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#f8f3ef] text-[11px] text-[#78716c] mb-3">
                 <Lock className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span>Simulated instant checkout. Click below to claim position.</span>
+                <span>Payment is not connected yet. No charge is made.</span>
               </div>
 
               <button
@@ -365,7 +365,7 @@ export const OutbidModal: React.FC<OutbidModalProps> = ({
                 ) : (
                   <>
                     <CreditCard className="w-4 h-4 stroke-[2.5]" />
-                    <span>Pay ${bidAmount.toLocaleString()} & Claim Rank #{estimatedRank}</span>
+                    <span>Claim Rank #{estimatedRank}</span>
                     <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                   </>
                 )}
