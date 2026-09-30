@@ -282,6 +282,12 @@ export default function App() {
           onQuickClaim={handleQuickClaim}
           activeNavTab={activeNavTab}
           setActiveNavTab={setActiveNavTab}
+          onSelectAll={() => {
+            setActiveNavTab('all');
+            setSelectedCategory('All');
+            setSearchQuery('');
+            setTimeframe('all');
+          }}
         />
 
         {/* Categories & Search Filter */}
