@@ -211,13 +211,13 @@ export default function App() {
       const newListing: Listing = {
         id: `user-${Date.now()}`,
         name: data.name || 'Untitled Project',
-        tagline: data.tagline || 'Innovative platform built for the future.',
-        url: data.url || 'https://example.com',
-        category: data.category || 'AI & Agents',
+        tagline: data.tagline || '',
+        url: data.url || '',
+        category: data.category || 'Side Projects',
         bid: amount,
         todayBid: amount,
-        clicks: 1,
-        icon: data.icon || '⚡',
+        clicks: 0,
+        icon: data.icon || '',
         createdAt: Date.now(),
         isUserCreated: true,
       };
